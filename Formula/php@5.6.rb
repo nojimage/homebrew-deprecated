@@ -10,6 +10,11 @@ class PhpAT56 < Formula
     sha256 "73b687b813a0984e201b53c5f3f579365f6d0d0e434c9acbeb08eae6d2328c06" => :mojave
   end
 
+  patch do
+    url "https://raw.githubusercontent.com/php-build/php-build/f2a40a73cac34600719d66239894db8cb5dbba85/share/php-build/patches/php-5.6-support-openssl-1.1.0.patch"
+    sha256 "507bb74b2612328cdf5e59b964645a49d0f9367add001ecd698e0fd0d4445421"
+  end
+
   keg_only :versioned_formula
 
   depends_on "httpd" => [:build, :test]
@@ -32,7 +37,7 @@ class PhpAT56 < Formula
   depends_on "libzip"
   depends_on "mcrypt"
   depends_on "openldap"
-  depends_on "openssl"
+  depends_on "openssl@1.1"
   depends_on "pcre"
   depends_on "sqlite"
   depends_on "tidy-html5"
@@ -148,7 +153,7 @@ class PhpAT56 < Formula
       --with-mysqli=mysqlnd
       --with-mysql=mysqlnd
       --with-ndbm#{headers_path}
-      --with-openssl=#{Formula["openssl"].opt_prefix}
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
       --with-pdo-dblib=#{Formula["freetds"].opt_prefix}
       --with-pdo-mysql=mysqlnd
       --with-pdo-odbc=unixODBC,#{Formula["unixodbc"].opt_prefix}
